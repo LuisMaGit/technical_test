@@ -1,0 +1,4 @@
+enum TransactionEditorType {
+  create,
+  edit,
+}

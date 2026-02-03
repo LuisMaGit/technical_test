@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "name": "Transactions Manager",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+        },
+    ]
+}
