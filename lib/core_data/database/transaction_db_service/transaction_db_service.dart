@@ -76,16 +76,17 @@ class TransactionDbService implements ITransactionDBService {
   }
 
   @override
-  Future<int> insertTransaction(TransactionModel model) async {
+  Future<bool> insertTransaction(TransactionModel model) async {
     final db = await _dbProviderService.getDB();
     final entity = TransactionEntity.fromModel(
       model: model,
       dateTimeFormatter: (date) => _timeService.format(date),
     );
-    return db.insert(
+    final rows = await db.insert(
       TransactionsTableContracts.tableName,
       entity.toMapInsert(),
     );
+    return rows > 0;
   }
 
   @override
@@ -100,27 +101,29 @@ class TransactionDbService implements ITransactionDBService {
   }
 
   @override
-  Future<int> deleteTransaction(int id) async {
+  Future<bool> deleteTransaction(int id) async {
     final db = await _dbProviderService.getDB();
-    return await db.delete(
+    final rows = await db.delete(
       TransactionsTableContracts.tableName,
       where: '${TransactionsTableContracts.columnId} = ?',
       whereArgs: [id],
     );
+    return rows > 0;
   }
 
   @override
-  Future<void> updateTransaction(TransactionModel model) async {
+  Future<bool> updateTransaction(TransactionModel model) async {
     final db = await _dbProviderService.getDB();
     final entity = TransactionEntity.fromModel(
       model: model,
       dateTimeFormatter: (date) => _timeService.format(date),
     );
-    await db.update(
+    final rows = await db.update(
       TransactionsTableContracts.tableName,
       entity.toMap(),
       where: '${TransactionsTableContracts.columnId} = ?',
       whereArgs: [model.id],
     );
+    return rows > 0;
   }
 }

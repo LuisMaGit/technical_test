@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_doodle/core/models/basic_ui_state.dart';
@@ -19,8 +21,10 @@ class TransactionsCubit extends Cubit<TransactionsState> {
   final _themeService = locator<ThemeService>();
   final _navigationService = locator<NavigatorService>();
 
+  StreamSubscription<ThemeModel>? _themeSubscription;
+
   Future<void> _listenToThemeChanges() async {
-    _themeService.themeStream.listen((themeMode) {
+    _themeSubscription = _themeService.themeStream.listen((themeMode) {
       emit(state.copyWith(themeMode: themeMode));
     });
   }
@@ -122,5 +126,11 @@ class TransactionsCubit extends Cubit<TransactionsState> {
       setLoadingState: true,
       categoryType: state.categoryType,
     );
+  }
+
+  @override
+  Future<void> close() {
+    _themeSubscription?.cancel();
+    return super.close();
   }
 }

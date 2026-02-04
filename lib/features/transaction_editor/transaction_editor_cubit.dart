@@ -33,7 +33,12 @@ class TransactionEditorCubit extends Cubit<TransactionEditorState> {
           ? -state.transaction.amount
           : state.transaction.amount,
     );
-    await _transactionDBService.insertTransaction(transactionToSave);
+    final isSuccess = await _transactionDBService.insertTransaction(transactionToSave);
+    if (!isSuccess) {
+      emit(state.copyWith(sendingData: false));
+      //TODO: handle error appropriately
+      return;
+    }
     _navigatorService.goBack();
   }
 
@@ -45,7 +50,12 @@ class TransactionEditorCubit extends Cubit<TransactionEditorState> {
           ? -state.transaction.amount.abs()
           : state.transaction.amount.abs(),
     );
-    await _transactionDBService.updateTransaction(transactionToSave);
+    final isSuccess = await _transactionDBService.updateTransaction(transactionToSave);
+    if (!isSuccess) {
+      emit(state.copyWith(sendingData: false));
+      //TODO: handle error appropriately
+      return;
+    }
     _navigatorService.goBack();
   }
 
@@ -81,7 +91,10 @@ class TransactionEditorCubit extends Cubit<TransactionEditorState> {
             ? TransactionModel(date: now)
             : props.transaction,
         isExpense: props.isExpense,
-        firstDate: _timeService.addYears(now, -2), // can select up to 2 years back
+        firstDate: _timeService.addYears(
+          now,
+          -kTransactionsDateYearInThePast,
+        ),
         lastDate: now,
         type: props.type,
         uiState: .success,
@@ -91,7 +104,14 @@ class TransactionEditorCubit extends Cubit<TransactionEditorState> {
 
   Future<void> onTapDelete() async {
     emit(state.copyWith(sendingData: true));
-    await _transactionDBService.deleteTransaction(state.transaction.id);
+    final isSuccess = await _transactionDBService.deleteTransaction(
+      state.transaction.id,
+    );
+    if (!isSuccess) {
+      emit(state.copyWith(sendingData: false));
+      //TODO: handle error appropriately
+      return;
+    }
     _navigatorService.goBack();
   }
 

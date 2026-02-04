@@ -240,6 +240,9 @@ flutter test
    - Categories are currently defined as hardcoded enums in the code, and currency is fixed to dollars with no currency selection
    - Would add: store categories in the database with their own table, create a category management feature allowing users to add/edit/delete custom categories. Additionally, implement currency selection (USD, EUR, GBP, etc.) with proper formatting and currency symbols, allowing users to choose their preferred currency.
 
+5. **Error Handling**
+   - Currently no try-catch blocks around database operations, stream subscriptions, or navigation calls. Database failures, SQLite errors, or unexpected exceptions would crash the app rather than showing user-friendly error messages
+   - Would add: wrap all async database operations in try-catch blocks, emit error states in cubits (e.g., `BasicUIState.error`), display user-friendly error messages using snackbars or dialogs.
 
 
 

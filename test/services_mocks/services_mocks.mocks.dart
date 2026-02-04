@@ -75,13 +75,13 @@ class MockITransactionDBService extends _i2.Mock
           as _i4.Future<List<_i5.TransactionModel>>);
 
   @override
-  _i4.Future<int> insertTransaction(_i5.TransactionModel? model) =>
+  _i4.Future<bool> insertTransaction(_i5.TransactionModel? model) =>
       (super.noSuchMethod(
             Invocation.method(#insertTransaction, [model]),
-            returnValue: _i4.Future<int>.value(0),
-            returnValueForMissingStub: _i4.Future<int>.value(0),
+            returnValue: _i4.Future<bool>.value(false),
+            returnValueForMissingStub: _i4.Future<bool>.value(false),
           )
-          as _i4.Future<int>);
+          as _i4.Future<bool>);
 
   @override
   _i4.Future<double> getTotalAmount() =>
@@ -93,22 +93,22 @@ class MockITransactionDBService extends _i2.Mock
           as _i4.Future<double>);
 
   @override
-  _i4.Future<int> deleteTransaction(int? id) =>
+  _i4.Future<bool> deleteTransaction(int? id) =>
       (super.noSuchMethod(
             Invocation.method(#deleteTransaction, [id]),
-            returnValue: _i4.Future<int>.value(0),
-            returnValueForMissingStub: _i4.Future<int>.value(0),
+            returnValue: _i4.Future<bool>.value(false),
+            returnValueForMissingStub: _i4.Future<bool>.value(false),
           )
-          as _i4.Future<int>);
+          as _i4.Future<bool>);
 
   @override
-  _i4.Future<void> updateTransaction(_i5.TransactionModel? model) =>
+  _i4.Future<bool> updateTransaction(_i5.TransactionModel? model) =>
       (super.noSuchMethod(
             Invocation.method(#updateTransaction, [model]),
-            returnValue: _i4.Future<void>.value(),
-            returnValueForMissingStub: _i4.Future<void>.value(),
+            returnValue: _i4.Future<bool>.value(false),
+            returnValueForMissingStub: _i4.Future<bool>.value(false),
           )
-          as _i4.Future<void>);
+          as _i4.Future<bool>);
 }
 
 /// A class which mocks [ThemeService].

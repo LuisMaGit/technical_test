@@ -1,9 +1,9 @@
 class TimeService {
   DateTime parse(String dateString) {
     try {
-      return DateTime.tryParse(dateString) ?? DateTime(-1);
+      return DateTime.tryParse(dateString) ?? DateTime(0);
     } on Exception {
-      return DateTime(-1);
+      return DateTime(0);
     }
   }
 

@@ -5,8 +5,8 @@ abstract class ITransactionDBService {
   Future<List<TransactionModel>> getTransactionsByCategory({
     required bool isExpense,
   });
-  Future<int> insertTransaction(TransactionModel model);
+  Future<bool> insertTransaction(TransactionModel model);
   Future<double> getTotalAmount();
-  Future<int> deleteTransaction(int id);
-  Future<void> updateTransaction(TransactionModel model);
+  Future<bool> deleteTransaction(int id);
+  Future<bool> updateTransaction(TransactionModel model);
 }

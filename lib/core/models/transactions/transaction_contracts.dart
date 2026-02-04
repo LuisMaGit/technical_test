@@ -42,4 +42,5 @@ enum TransactionExpenseCategory {
 }
 
 const kTransactionsMoneySymbol = '\$';
+const kTransactionsDateYearInThePast = 2;
 
