@@ -12,15 +12,15 @@ A Flutter application for managing personal financial transactions with support 
 
 ### Core Functionality 
 - ✅ Add transactions (income/expense) with amount, category, date, and optional notes
-- ✅ Display a list of all transactions with real-time updates
-- ✅ Show current balance at the top of the screen (calculated dynamically)
+- ✅ Display a list of all transactions ordered by date
+- ✅ Show current balance at the top of the screen
 - ✅ Filter transactions by type (income/expense/all)
-- ✅ Persist data locally using SQLite - survives app restarts
+- ✅ Persist data locally using SQLite
 
 ### Bonus Features Implemented
 - ✅ Form validation in transaction editor
 - ✅ Transaction editing and deletion
-- ✅ Unit tests for Bloc logic (partial)
+- ✅ Unit tests for Cubit logic (partial)
 
 ### Technical Requirements 
 - ✅ **State Management**: Implemented using `flutter_bloc` (Cubit pattern)
@@ -77,7 +77,7 @@ lib/
 
 #### 1. **Core Layer** (`lib/core/`)
 Contains the business logic and domain models that are framework-agnostic:
-- **Models**: Domain entities like `TransactionModel`
+- **Models**: Domain models like `TransactionModel`
 - **Service Interfaces**: Abstract contracts (e.g., `ITransactionDBService`, `IPreferencesService`)
 - **Extensions**: Utility extensions (e.g., `IntExtensions`)
 
@@ -188,7 +188,7 @@ Service Implementation (TransactionDbService)
 
 ## Testing
 
-The `TransactionsCubit` is fully covered with unit tests, including:
+The `TransactionsCubit` is fully covered with unit tests.
 
 Run tests with:
 ```bash
@@ -203,7 +203,7 @@ flutter test
 1. **Clean Architecture with Feature Modules**
    - **Decision**: Organized code into `core`, `core_data`, `core_ui`, and `features` directories
    - **Rationale**: Provides clear separation of concerns and makes the codebase more maintainable and testable
-   - **Trade-off**: Slightly more complex folder structure, but significantly improves long-term maintainability
+   - **Trade-off**: Slightly more complex folder structure, but significantly improves long term maintainability
 
 2. **Cubit over Bloc**
    - **Decision**: Used Cubit pattern instead of full Bloc pattern
@@ -242,7 +242,7 @@ flutter test
 
 5. **Error Handling**
    - Currently no try-catch blocks around database operations, stream subscriptions, or navigation calls. Database failures, SQLite errors, or unexpected exceptions would crash the app rather than showing user-friendly error messages
-   - Would add: wrap all async database operations in try-catch blocks, emit error states in cubits (e.g., `BasicUIState.error`), display user-friendly error messages using snackbars or dialogs.
+   - Would add: wrap all async database operations in try-catch blocks, emit error states in cubits (e.g., `BasicUIState.error`), display user-friendly error messages using snackbars, dialogs or error screen.
 
 
 
