@@ -45,7 +45,7 @@ This project follows **Clean Architecture** principles with clear separation of 
 ```
 lib/
 ├── core/                  # Core business logic layer
-│   ├── models/            # Domain models (entities)
+│   ├── models/            # Domain models
 │   ├── services/          # Abstract service interfaces
 │   └── extensions/        # Dart extension methods
 │
